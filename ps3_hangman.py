@@ -176,7 +176,22 @@ bText.write(bMessage, align="center", font=(font))
 
 #Drawing the noose
 noose = turtle.Turtle()
-
+noose.width(10)
+noose.hideturtle()
+noose.color("darkgreen")
+noose.penup()
+noose.goto(-200,-200)
+noose.pendown()
+noose.goto(200,-200)
+noose.goto(150,-200)
+noose.goto(100,-150)
+noose.goto(50,-200)
+noose.penup()
+noose.goto(100,-200)
+noose.pendown()
+noose.goto(100,200)
+noose.goto(0,200)
+noose.goto(0,150)
 
 
 

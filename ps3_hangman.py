@@ -146,14 +146,14 @@ def getAvailableLetters(lettersGuessed):
 #secretWord = chooseWord(wordlist).lower()
 version = "v0.1"
 gameTitle = "Cassy's Hangman "+version
-secretWord = "test"
+secretWord = "test"                          #REMOVE AFTER TESTING
 window = turtle.Screen()
 window.title(gameTitle)
 window.bgcolor("black")
 window.setup()
 window.tracer(0)
 tMessage = "Welcome to "+gameTitle+"!"
-bMessage = "Press enter to begin."
+bMessage = "Input 'new' for a new game or 'quit' to quit."
 font = ("Share Tech Mono", 24, "normal")
 
 #TopText
@@ -193,32 +193,37 @@ noose.goto(100,200)
 noose.goto(0,200)
 noose.goto(0,150)
 
-
+window.update()
+guessedLetter = turtle.textinput(" ", 'Input:')
 
 # --- Main ---
-while True:
-  window.update()
-#     print('Welcome to the game, Hangman!')
-#     print('I am thinking of a word that is ' + str(len(secretWord)) + ' letters long.')
-#     print('-------------')
-#     while guessesLeft >= 1:
-#       print('You have ' + str(guessesLeft) + ' guesses left.')
-#       print('Available letters: ' + getAvailableLetters(lettersGuessed))
-#       guessedLetter = input('Please guess a letter: ')
-#       if guessedLetter in lettersGuessed:
-#         print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
-#         print('-------------')
-#       else:
-#         lettersGuessed.append(guessedLetter)
-#         if guessedLetter in secretWord:
-#           print('Good guess: ' + getGuessedWord(secretWord, lettersGuessed))
-#           print('-------------')
-#           if isWordGuessed(secretWord, lettersGuessed):
-#             print('Congratulations, you won!')
-#             break
-#         else:
-#           guessesLeft -= 1
-#           print('Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed))
-#           print('-------------')
-#           if guessesLeft == 0:
-#             print('Sorry, you ran out of guesses. The word was ' + secretWord + '.')
+while guessedLetter.toLower() is 'new':
+    while guessesLeft >=1:
+        # Window Updating
+        bMessage = 'Available letters: ' + getAvailableLetters(lettersGuessed)
+        window.update()
+        bText.clear()
+        bText.write(bMessage, align="center", font=(font))
+        tText.clear()
+        tText.write(tMessage, align="center", font=(font))
+        
+        # Guessing
+        guessedLetter = turtle.textinput(" ", 'Please guess a letter:')
+
+      if guessedLetter in lettersGuessed:
+        print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
+        print('-------------')
+      else:
+        lettersGuessed.append(guessedLetter)
+        if guessedLetter in secretWord:
+          print('Good guess: ' + getGuessedWord(secretWord, lettersGuessed))
+          print('-------------')
+          if isWordGuessed(secretWord, lettersGuessed):
+            print('Congratulations, you won!')
+            break
+        else:
+          guessesLeft -= 1
+          print('Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed))
+          print('-------------')
+          if guessesLeft == 0:
+            print('Sorry, you ran out of guesses. The word was ' + secretWord + '.')

@@ -146,7 +146,6 @@ def getAvailableLetters(lettersGuessed):
 #secretWord = chooseWord(wordlist).lower()
 version = "v0.1"
 gameTitle = "Cassy's Hangman "+version
-secretWord = "test"                          #REMOVE AFTER TESTING
 window = turtle.Screen()
 window.title(gameTitle)
 window.bgcolor("black")
@@ -198,7 +197,11 @@ guessedLetter = turtle.textinput(" ", 'Input:')
 
 # --- Main ---
 while guessedLetter.toLower() is 'new':
-    while guessesLeft >=1:
+    lettersGuessed = []
+    secretWord = "test"                                                                 #REMOVE AFTER TESTING
+    guessesLeft = 8
+
+    while guessesLeft > 0:
         # Window Updating
         bMessage = 'Available letters: ' + getAvailableLetters(lettersGuessed)
         window.update()
@@ -210,20 +213,19 @@ while guessedLetter.toLower() is 'new':
         # Guessing
         guessedLetter = turtle.textinput(" ", 'Please guess a letter:')
 
-      if guessedLetter in lettersGuessed:
-        print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
-        print('-------------')
-      else:
-        lettersGuessed.append(guessedLetter)
+        if guessedLetter in lettersGuessed:
+            tMessage = "Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed) # PROGRESS
+        else:
+            lettersGuessed.append(guessedLetter)
+
         if guessedLetter in secretWord:
-          print('Good guess: ' + getGuessedWord(secretWord, lettersGuessed))
-          print('-------------')
+          tMessage = 'Good guess: ' + getGuessedWord(secretWord, lettersGuessed)
           if isWordGuessed(secretWord, lettersGuessed):
-            print('Congratulations, you won!')
-            break
+            tMessage = 'Congratulations, you won!'
+            bMessage = "Input 'new' for a new game or 'quit' to quit."
         else:
           guessesLeft -= 1
-          print('Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed))
-          print('-------------')
+          tMessage = 'Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed)
+          
           if guessesLeft == 0:
-            print('Sorry, you ran out of guesses. The word was ' + secretWord + '.')
+            tMessage = 'Sorry, you ran out of guesses. The word was ' + secretWord + '.'

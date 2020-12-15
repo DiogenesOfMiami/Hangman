@@ -196,7 +196,7 @@ window.update()
 guessedLetter = turtle.textinput(" ", 'Input:')
 
 # --- Main ---
-while guessedLetter.toLower() is 'new':
+while guessedLetter.lower() == 'new':
     lettersGuessed = []
     secretWord = "test"                                                                 #REMOVE AFTER TESTING
     guessesLeft = 8

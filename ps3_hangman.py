@@ -130,19 +130,12 @@ def getAvailableLetters(lettersGuessed):
 #             print('Sorry, you ran out of guesses. The word was ' + secretWord + '.')
 #     input()
 
-# When you've completed your hangman function, uncomment these two lines
-# and run this file to test! (hint: you might want to pick your own
-# secretWord while you're testing)
-
 #OldSetup
 #secretWord = chooseWord(wordlist).lower()
 #hangman(secretWord)
 
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
+#-----NewSetup-----
 #wordlist = loadWords()
-
-#NewSetup
 #secretWord = chooseWord(wordlist).lower()
 version = "v0.1"
 gameTitle = "Cassy's Hangman "+version
@@ -173,37 +166,82 @@ bText.hideturtle()
 bText.goto(0,-290)
 bText.write(bMessage, align="center", font=(font))
 
-#Drawing the noose
+#Creating the noose
 noose = turtle.Turtle()
 noose.width(10)
 noose.hideturtle()
 noose.color("darkgreen")
 noose.penup()
-noose.goto(-200,-200)
-noose.pendown()
-noose.goto(200,-200)
-noose.goto(150,-200)
-noose.goto(100,-150)
-noose.goto(50,-200)
-noose.penup()
-noose.goto(100,-200)
-noose.pendown()
-noose.goto(100,200)
-noose.goto(0,200)
-noose.goto(0,150)
 
+#Drawing the noose
+def drawNoose():
+    noose.penup()
+    noose.goto(-200,-200)
+    noose.pendown()
+    noose.goto(200,-200)
+    noose.goto(150,-200)
+    noose.goto(100,-150)
+    noose.goto(50,-200)
+    noose.penup()
+    noose.goto(100,-200)
+    noose.pendown()
+    noose.goto(100,200)
+    noose.goto(0,200)
+    noose.goto(0,150)
+    noose.penup()
+
+#Creating the man
+man = turtle.Turtle()
+man.width(10)
+man.hideturtle()
+man.color("darkgreen")
+man.penup()
+
+#Drawing the man
+def newLimb(limbs):
+    if limbs == 7: #Draw head
+        man.goto(0,100)
+        man.pendown()
+        man.circle(25)
+        man.penup()        
+
+
+    elif limbs == 6: #Draw body
+        man.goto(0,100)
+        man.pendown()
+        man.goto(0,25)
+        man.penup()
+    
+    elif limbs == 5: #Draw left leg
+        man.pendown()
+        man.goto(-20,-10)
+    
+    # elif limbs == 4: #Draw right leg
+
+    # elif limbs == 3:
+
+    # elif limbs == 2:
+
+    # elif limbs == 1:
+
+    # elif limbs == 0:
+    
 window.update()
-guessedLetter = turtle.textinput(" ", 'Input:')
+guessedLetterRaw = turtle.textinput("Input", ' ')
+guessedLetter = guessedLetterRaw.lower()
 
 # --- Main ---
-while guessedLetter.lower() == 'new':
+while guessedLetter == 'new':
+    drawNoose()
     lettersGuessed = []
     secretWord = "test"                                                                 #REMOVE AFTER TESTING
     guessesLeft = 8
+    tText.clear()
+    bText.clear()
 
     while guessesLeft > 0:
         # Window Updating
-        bMessage = 'Available letters: ' + getAvailableLetters(lettersGuessed)
+        bMessage = 'Remaining letters: ' + getAvailableLetters(lettersGuessed)
         window.update()
         bText.clear()
         bText.write(bMessage, align="center", font=(font))
@@ -211,7 +249,7 @@ while guessedLetter.lower() == 'new':
         tText.write(tMessage, align="center", font=(font))
         
         # Guessing
-        guessedLetter = turtle.textinput(" ", 'Please guess a letter:')
+        guessedLetter = turtle.textinput("Input", 'Please guess a letter:')
 
         if guessedLetter in lettersGuessed:
             tMessage = "Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed) # PROGRESS
@@ -219,13 +257,22 @@ while guessedLetter.lower() == 'new':
             lettersGuessed.append(guessedLetter)
 
         if guessedLetter in secretWord:
-          tMessage = 'Good guess: ' + getGuessedWord(secretWord, lettersGuessed)
-          if isWordGuessed(secretWord, lettersGuessed):
-            tMessage = 'Congratulations, you won!'
-            bMessage = "Input 'new' for a new game or 'quit' to quit."
+            if isWordGuessed(secretWord, lettersGuessed):
+                noose.clear()
+                tText.clear()
+                tMessage = 'Congratulations, you won!'
+                tText.write(tMessage, align="center", font=(font))
+                guessedLetter = turtle.textinput("Input", "Input 'new' for a new game or 'quit' to quit.")
+                break
+            else:
+                tMessage = 'Good guess: ' + getGuessedWord(secretWord, lettersGuessed)
         else:
           guessesLeft -= 1
+          newLimb(guessesLeft)
           tMessage = 'Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed)
           
-          if guessesLeft == 0:
-            tMessage = 'Sorry, you ran out of guesses. The word was ' + secretWord + '.'
+    tMessage = 'Sorry, you ran out of guesses. The word was ' + secretWord + '.'
+    bMessage = "Input 'new' for a new game or 'quit' to quit."
+    guessedLetter = turtle.textinput(" ", ' ')
+
+            

@@ -136,7 +136,6 @@ def getAvailableLetters(lettersGuessed):
 
 #-----NewSetup-----
 #wordlist = loadWords()
-#secretWord = chooseWord(wordlist).lower()
 version = "v0.1"
 gameTitle = "Cassy's Hangman "+version
 window = turtle.Screen()
@@ -252,9 +251,11 @@ while guessedLetter == 'new':
     man.clear()
     lettersGuessed = []
     secretWord = "test"                                                                 #REMOVE AFTER TESTING
+    #secretWord = chooseWord(wordlist).lower()                                          #UNCOMMENT AFTER TESTING
     guessesLeft = 7
     tText.clear()
     bText.clear()
+    tMessage = "Welcome to "+gameTitle+"!"
 
     while guessesLeft > 0:
         # Window Updating
@@ -273,23 +274,23 @@ while guessedLetter == 'new':
         else:
             lettersGuessed.append(guessedLetter)
 
-        if guessedLetter in secretWord:
-            if isWordGuessed(secretWord, lettersGuessed):
-                noose.clear()
-                tText.clear()
-                tMessage = 'Congratulations, you won!'
-                tText.write(tMessage, align="center", font=(font))
-                guessedLetter = turtle.textinput("Input", "Input 'new' for a new game or 'quit' to quit.")
-                break
+            if guessedLetter in secretWord:
+                if isWordGuessed(secretWord, lettersGuessed):
+                    noose.clear()
+                    tText.clear()
+                    tMessage = 'Congratulations, you won!'
+                    tText.write(tMessage, align="center", font=(font))
+                    guessedLetter = turtle.textinput("Input", "Input 'new' for a new game or 'quit' to quit.")
+                    break
+                else:
+                    tMessage = 'Good guess: ' + getGuessedWord(secretWord, lettersGuessed)
             else:
-                tMessage = 'Good guess: ' + getGuessedWord(secretWord, lettersGuessed)
-        else:
-            guessesLeft -= 1
-            newLimb(guessesLeft)
-            if guessesLeft < 1:
-                break
-            else:
-                tMessage = 'Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed)
+                guessesLeft -= 1
+                newLimb(guessesLeft)
+                if guessesLeft < 1:
+                    break
+                else:
+                    tMessage = 'Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed)
 
     tText.clear()      
     tMessage = 'Sorry, you ran out of guesses. The word was ' + secretWord + '.'

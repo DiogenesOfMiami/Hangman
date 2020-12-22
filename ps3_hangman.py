@@ -1,12 +1,4 @@
-# Hangman game
-#
-
-# -----------------------------------
-# Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
-
+import string
 import random
 import turtle
 
@@ -50,7 +42,6 @@ def isWordGuessed(secretWord, lettersGuessed):
     secretWordList = list(secretWord)
     return all(elem in lettersGuessed for elem in secretWordList)
 
-
 def getGuessedWord(secretWord, lettersGuessed):
     '''
     secretWord: string, the word the user is guessing
@@ -65,78 +56,21 @@ def getGuessedWord(secretWord, lettersGuessed):
             secretWordList[secretWordList.index(letter)] = '_ '
     return ''.join(map(str, secretWordList))
 
-
-
 def getAvailableLetters(lettersGuessed):
     '''
     lettersGuessed: list, what letters have been guessed so far
     returns: string, comprised of letters that represents what letters have not
     yet been guessed.
     '''
-    import string
     alphaList = list(string.ascii_lowercase)
     for char in lettersGuessed:
         if char in alphaList:
             alphaList.remove(char)
     return ''.join(map(str, alphaList)) 
-    
 
-# def hangman(secretWord):
-#     '''
-#     secretWord: string, the secret word to guess.
-
-#     Starts up an interactive game of Hangman.
-
-#     * At the start of the game, let the user know how many 
-#       letters the secretWord contains.
-
-#     * Ask the user to supply one guess (i.e. letter) per round.
-
-#     * The user should receive feedback immediately after each guess 
-#       about whether their guess appears in the computers word.
-
-#     * After each round, you should also display to the user the 
-#       partially guessed word so far, as well as letters that the 
-#       user has not yet guessed.
-
-#     Follows the other limitations detailed in the problem write-up.
-#     '''
-#     guessesLeft = 8
-#     lettersGuessed = []
-
-#     print('Welcome to the game, Hangman!')
-#     print('I am thinking of a word that is ' + str(len(secretWord)) + ' letters long.')
-#     print('-------------')
-#     while guessesLeft >= 1:
-#       print('You have ' + str(guessesLeft) + ' guesses left.')
-#       print('Available letters: ' + getAvailableLetters(lettersGuessed))
-#       guessedLetter = input('Please guess a letter: ')
-#       if guessedLetter in lettersGuessed:
-#         print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
-#         print('-------------')
-#       else:
-#         lettersGuessed.append(guessedLetter)
-#         if guessedLetter in secretWord:
-#           print('Good guess: ' + getGuessedWord(secretWord, lettersGuessed))
-#           print('-------------')
-#           if isWordGuessed(secretWord, lettersGuessed):
-#             print('Congratulations, you won!')
-#             break
-#         else:
-#           guessesLeft -= 1
-#           print('Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed))
-#           print('-------------')
-#           if guessesLeft == 0:
-#             print('Sorry, you ran out of guesses. The word was ' + secretWord + '.')
-#     input()
-
-#OldSetup
-#secretWord = chooseWord(wordlist).lower()
-#hangman(secretWord)
-
-#-----NewSetup-----
+#-----Setup-----
 wordlist = loadWords()
-version = "v0.1"
+version = "v0.2"
 gameTitle = "Cassy's Hangman "+version
 window = turtle.Screen()
 window.title(gameTitle)
@@ -299,9 +233,5 @@ while guessedLetter == 'new':
                 else:
                     tMessage = 'Oops! That letter is not in my word: ' + getGuessedWord(secretWord, lettersGuessed)
 
-    
 #TODO 
-#1 Three line text output?
-#2 Rope removal after win
-
-            
+#1 Three line text output?      

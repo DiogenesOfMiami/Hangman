@@ -1,0 +1,20 @@
+[
+    {
+        "start": [-200,-200],
+        "stroke_method_str": "noose.goto",
+        "parameters":[
+            {"x":[200,-200]}
+            ,{"x":[150,-200]}
+            ,{"x":[100,-150]}
+            ,{"x":[50,-200]}
+        ]
+    },
+    {
+        "start": [100,-200],
+        "stroke_method_str": "noose.goto",
+        "parameters":[
+            {"x":[100,200]}
+            ,{"x":[0,200]}
+        ]
+    }
+]

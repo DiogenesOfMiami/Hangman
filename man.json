@@ -1,0 +1,37 @@
+[
+    {
+        "start": [0,200],
+        "stroke_method_str": "man.goto",
+        "parameters":{"x":[0,150]}
+    },
+    {
+        "start": [0,100],
+        "stroke_method_str": "man.circle",
+        "parameters":{"radius": 25}
+    },
+    {
+        "start": [0,100],
+        "stroke_method_str": "man.goto",
+        "parameters":{"x":[0,25]}
+    },
+    {
+        "start": [0,25],
+        "stroke_method_str": "man.goto",
+        "parameters":[{"x":[-30,-40]}]
+    },
+    {
+        "start": [0,25],
+        "stroke_method_str": "man.goto",
+        "parameters":[{"x":[30,-40]}]
+    },
+    {
+        "start": [0,75],
+        "stroke_method_str": "man.goto",
+        "parameters":[{"x":[-30,15]}]
+    },
+    {
+        "start": [0,75],
+        "stroke_method_str": "man.goto",
+        "parameters":[{"x":[30,15]}]
+    }
+]

@@ -29,7 +29,6 @@ def chooseWord(wordlist):
     """
     return random.choice(wordlist)
 
-# end of helper code
 # -----------------------------------
 
 def isWordGuessed(secretWord, lettersGuessed):
@@ -70,7 +69,7 @@ def getAvailableLetters(lettersGuessed):
 
 #-----Setup-----
 wordlist = loadWords()
-version = "v0.2"
+version = "v1.0"
 gameTitle = "Cassy's Hangman "+version
 window = turtle.Screen()
 window.title(gameTitle)
